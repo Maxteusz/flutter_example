@@ -66,7 +66,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Coins> coins_trading = [];
   List<CoinMarket> coins_market = [];
-  int _set_page = 2;
+  int _set_page = 1;
   late Future<List<Coins>> futureCoins;
   late Future<List<CoinMarket>> futureCoinsMarket;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
