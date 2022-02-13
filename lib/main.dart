@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String chartTitle = "";
   String priceChart = "";
   String changePricePercentage24h = "";
-  String changePrice24h = "null";
+  String changePrice24h = "";
   bool isEnabledChartButton = false;
 
   @override
