@@ -12,6 +12,7 @@ import 'package:queris_zadanie/coin_market.dart';
 import 'dart:convert';
 import 'package:fl_chart/fl_chart.dart';
 
+
 import 'coins_trading.dart';
 
 void main() {
@@ -21,7 +22,10 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({Key? key}) : super(key: key);
+
+
 
   // This widget is the root of your application.
   @override
@@ -73,9 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String title = "Home";
   String chartTitle = "";
   String priceChart = "";
+  String logo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnIzLd2AEYnEMBJWAhnZH5Gg9txQdwWZLVxQ&usqp=CAU";
   String changePricePercentage24h = "";
   String changePrice24h = "";
   bool isEnabledChartButton = false;
+
 
   @override
   void initState() {
@@ -94,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (response.statusCode == 200) {
         coins_trading =
             Coins_trading.fromJson(json.decode(response.body)).coins;
+
         return Coins_trading.fromJson(json.decode(response.body)).coins;
       } else {
         // If the server did not return a 200 OK response,
@@ -123,9 +130,10 @@ class _MyHomePageState extends State<MyHomePage> {
         priceChart = coins_market[1].currentPrice.toStringAsFixed(5);
         changePricePercentage24h =
             coins_market[1].priceChangePercentage24h.toStringAsFixed(5);
-        changePrice24h = coins_market[1].priceChange24h.toStringAsFixed(5);
+        changePrice24h = coins_market[1].priceChange24h.toString();
         setState(() {
           isEnabledChartButton = true;
+
         });
 
         return coins_market;
@@ -172,12 +180,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(title,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold))),
-            /*Container(
-              width: 80,
-                height: 60,
+            Container(
+              width: 40,
+                height: 40,
                 margin: EdgeInsets.only(right: 20),
-                child:Image.network("https://biznes.piekary.pl/wp-content/uploads/sites/3/2017/06/QUERIS.jpg")
-                    ),*/
+                child:Image.network(logo,
+                    key: ValueKey(logo),
+                errorBuilder: (context, error, stackTrace)
+                {
+                  return Container(child: Icon(Icons.signal_cellular_connected_no_internet_4_bar,
+                  color: Colors.red,),);
+                })
+                    ),
           ],
         ),
         backgroundColor: Colors.white,
@@ -298,7 +312,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                   changePrice24h =
                                                       coins_market[index]
                                                           .priceChange24h
-                                                          .toStringAsFixed(5);
+                                                          .toString();
                                                 });
                                               },
                                               borderRadius:
@@ -396,7 +410,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                             coins_market[index]
                                                                 .priceChangePercentage24h
                                                                 .toStringAsFixed(
-                                                                    2),
+                                                                    2) + "%",
                                                             textAlign:
                                                                 TextAlign.left,
                                                             style: TextStyle(
@@ -564,7 +578,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           changePrice24h +
                                           " (" +
                                           changePricePercentage24h +
-                                          ")",
+                                          "%)",
                                       style: TextStyle(
                                           fontSize: 13,
                                           color: double.parse(
