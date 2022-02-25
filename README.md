@@ -1,4 +1,4 @@
-# queris_zadanie
+# flutter_example
 
 A new Flutter project.
 
